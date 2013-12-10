@@ -1,0 +1,36 @@
+; HED_CSP.def : Declares the module parameters for the DLL.
+
+LIBRARY      "HED_CSP"
+DESCRIPTION  'HED_CSP Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+
+	CPAcquireContext1
+    CPReleaseContext1
+    CPGenKey1
+    CPDeriveKey1
+    CPDestroyKey1
+    CPSetKeyParam1
+    CPGetKeyParam1
+    CPExportKey1
+    CPImportKey1
+    CPEncrypt1
+    CPDecrypt1
+    CPCreateHash1
+    CPHashData1
+    CPHashSessionKey1
+    CPDestroyHash1
+    CPSignHash1
+    CPVerifySignature1
+    CPGenRandom1
+    CPGetUserKey1
+    CPSetProvParam1
+    CPGetProvParam1
+    CPSetHashParam1
+    CPGetHashParam1
+	CPDuplicateHash1
+	CPDuplicateKey1
+
+    DllRegisterServer   PRIVATE
+    DllUnregisterServer PRIVATE
