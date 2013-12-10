@@ -1,0 +1,29 @@
+; Declares the module parameters for the DLL.
+
+LIBRARY      "HDIFD20B"
+DESCRIPTION  'READER Windows Dynamic Link Library'
+
+EXPORTS
+; Explicit exports can go here
+
+	HD_OpenPort			@201
+	HD_ClosePort		@202
+	HD_SetTimeout		@203
+	HD_ProbeCard		@204
+	HD_PowerOn			@205
+	HD_PowerOff			@206
+	HD_ResetCard		@207	
+	HD_ApduT0			@208	
+	HD_GetDescriptor	@209
+
+	HD_OpenPath			@213
+	HD_ApduVB			@218
+	HD_ResetCardVB		@219	
+
+;	HD_GetReaderList	@3
+;	HD_ContextRelease	@10
+;	HD_ContextInitialize	@11
+
+	HD_GetProtocolType	@12
+	HD_GetReaderNames	@13
+	HD_OpenPort2		@14
