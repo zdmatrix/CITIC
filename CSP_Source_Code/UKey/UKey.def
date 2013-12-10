@@ -1,0 +1,41 @@
+; UKey.def : Declares the module parameters for the DLL.
+
+LIBRARY      "UKey"
+DESCRIPTION  'UKey Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	SetUkeyLastErr
+	GetUkeyLastErr
+	UKeyOpen
+	UKeyClose
+	UKeyVerifyPIN
+	UKeyCheckPIN
+	UKeyChangePINToUkey
+	UKeyChangePIN
+	UKeyGetChallange
+	UKeyGetContainer
+	UKeyGetCspContainerCount
+	UKeyFindContainer
+	UKeyDelContainer
+	UKeyAddContainer
+	UKeyUpdateContainer
+	UKeyGenKey
+	UKeyGetKey
+	UKeyRSAEncrypt
+	UKeyRSADecrypt
+	UKeyRSASignature
+	UKeyRSASignatureVerify
+	UKeyGetNameFromCN
+	UKeyGetCertName
+	UKeyAppendCert
+	UKeyGetCert
+	UKeyImportKey
+	UKeyUnLock
+	UKeyGetInfo
+	UKeySetContainerName
+	UKeyGetContainerName
+	UKeyClearPin
+
+	UKeyTestDisplayNum
+
