@@ -9,6 +9,7 @@
 #define new DEBUG_NEW
 #endif
 
+#define PROC_ID "0x50dd5230, 0xba8a, 0x11d1, 0xbf, 0x5d,0x00, 0x00, 0xf8, 0x05, 0xf5, 0x30"
 
 // CVisualCardMonitorApp
 
@@ -30,6 +31,7 @@ CVisualCardMonitorApp::CVisualCardMonitorApp()
 
 CVisualCardMonitorApp theApp;
 
+HANDLE AppHandle;
 
 // CVisualCardMonitorApp initialization
 
@@ -50,6 +52,13 @@ BOOL CVisualCardMonitorApp::InitInstance()
 	if (!AfxSocketInit())
 	{
 		AfxMessageBox(IDP_SOCKETS_INIT_FAILED);
+		return FALSE;
+	}
+
+	AppHandle = CreateMutex(NULL, FALSE, PROC_ID);
+	if (GetLastError() == ERROR_ALREADY_EXISTS)
+	{
+		AfxMessageBox("程序已经启动");
 		return FALSE;
 	}
 
