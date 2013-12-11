@@ -1,0 +1,33 @@
+; HEDCsp.def : Declares the module parameters for the DLL.
+
+LIBRARY      "HEDCsp"
+DESCRIPTION  'HEDCsp Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	CPAcquireContext
+    CPReleaseContext
+    CPGenKey
+    CPDeriveKey
+    CPDestroyKey
+    CPSetKeyParam
+    CPGetKeyParam
+    CPExportKey
+    CPImportKey
+    CPEncrypt
+    CPDecrypt
+    CPCreateHash
+    CPHashData
+    CPHashSessionKey
+    CPDestroyHash
+    CPSignHash
+    CPVerifySignature
+    CPGenRandom
+    CPGetUserKey
+    CPSetProvParam
+    CPGetProvParam
+    CPSetHashParam
+    CPGetHashParam
+
+    DllRegisterServer   PRIVATE
+    DllUnregisterServer PRIVATE

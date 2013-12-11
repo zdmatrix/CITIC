@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
 	dwParam = KP_KEYLEN;
 //	pbData = (BYTE*)malloc(sizeof(BYTE));
 	dwFlags = 0x31;
+	pVTable = (PVTableProvStruc)malloc(sizeof(PVTableProvStruc));
 
 	
 
@@ -33,7 +34,7 @@ int main(int argc, char* argv[])
 //	CPSetKeyParam1(hProv, hKey, KP_SALT, pbDate, dwFlags);
 	CPAcquireContext1(
 		&hProv, 
-		"SCM Microsystems Inc. SCR33x USB Smart Card Reader 0", 
+		"HED_RSA_Cryptographic_Service_Provider_V1.0", 
 		0x00000020,
 		pVTable
 		);

@@ -151,8 +151,9 @@ CPAcquireContext1(
  		//windows验证的时候采用读卡器+USB的名称带入作为container的名称，做一下转换
 //		if (memcmp((char *)szContainer, "\\\\.\\VIRTUAL_CARD_READER 0\\", 30) == 0)
 		
- 		if (memcmp((char *)szContainer, "\\\\.\\SCM Microsystems Inc. SCR33x USB Smart Card Reader 0\\", 0x34) == 0)
- 			memcpy((char *)strCardContainer.pbContName , szContainer, 0x34);
+// 		if (memcmp((char *)szContainer, "\\\\.\\SCM Microsystems Inc. SCR33x USB Smart Card Reader 0\\", 0x34) == 0)
+		if (memcmp((char *)szContainer, "HED_RSA_Cryptographic_Service_Provider_V1.0", 0x2B) == 0)
+ 			memcpy((char *)strCardContainer.pbContName , szContainer, 0x2B);
 		else
 			strcpy((char *)strCardContainer.pbContName , szContainer);
 
@@ -172,7 +173,8 @@ CPAcquireContext1(
 		{
 //			if ((szContainer != NULL) && (memcmp((char *)szContainer, "\\\\.\\VIRTUAL_CARD_READER 0\\", 30) == 0))
 			
-			if ((szContainer != NULL) && (memcmp((char *)szContainer, "\\\\.\\SCM Microsystems Inc. SCR33x USB Smart Card Reader 0\\", 0x34) == 0))
+//			if ((szContainer != NULL) && (memcmp((char *)szContainer, "\\\\.\\SCM Microsystems Inc. SCR33x USB Smart Card Reader 0\\", 0x34) == 0))
+			if ((szContainer != NULL) && (memcmp((char *)szContainer, "HED_RSA_Cryptographic_Service_Provider_V1.0", 0x2b) == 0))
 			{
 				if (UKeyGetContainerName(pCspContainer->hUKey, ContainerNameEx, &ContainerNameLenEx))
 				{
@@ -242,8 +244,10 @@ CPAcquireContext1(
 //		DEBUG_MSG("UKeyGetCspContainerCount Err !","CPAcquireContext !");
 //		goto CPAcquireContextOut;
 //	}
+
 //	if(memcmp((char *)szContainer, "\\\\.\\VIRTUAL_CARD_READER 0\\", 30) == 0))
-	if (memcmp((char *)szContainer, "\\\\.\\SCM Microsystems Inc. SCR33x USB Smart Card Reader 0\\", 0x34) == 0)
+//	if (memcmp((char *)szContainer, "\\\\.\\SCM Microsystems Inc. SCR33x USB Smart Card Reader 0\\", 0x34) == 0)
+	if (memcmp((char *)szContainer, "HED_RSA_Cryptographic_Service_Provider_V1.0", 0x2b) == 0)
 	{
 		if (UKeyGetContainerName(pCspContainer->hUKey, ContainerNameEx, &ContainerNameLenEx))
 		{

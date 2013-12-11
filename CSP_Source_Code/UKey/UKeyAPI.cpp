@@ -904,6 +904,7 @@ BOOL WINAPI UKeyGetContainer(HANDLE hUKey,BYTE *pbContainer,BYTE *pstrCardCt)
 	BOOL ret = UKeyGetContainerData(hUKey, respData, &respDataLen, &count);
 //	if (!ret)
 //		return FALSE;
+/*
 	respData[0] = 0x00;
 	respData[1] = 0x13;
 	respData[2] = 0x00;
@@ -917,7 +918,7 @@ BOOL WINAPI UKeyGetContainer(HANDLE hUKey,BYTE *pbContainer,BYTE *pstrCardCt)
 	respData[10] = 0x00;
 	respData[11] = 0x00;
 	respData[12] = 0x00;
-
+*/
 	count = 0x0d;
 	CardContainer *pContainer = (CardContainer *)respData;
 	int i = 0;
