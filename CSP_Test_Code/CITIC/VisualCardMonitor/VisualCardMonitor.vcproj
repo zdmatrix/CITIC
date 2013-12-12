@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\..\CSPBin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="1"
@@ -67,9 +67,12 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="CRYPT32.LIB UKey.lib CspCtrl.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="D:\vs\code\CITIC\trunk\CSPBin"
 				GenerateDebugInformation="true"
 				SubSystem="2"
+				ImportLibrary="D:\vs\code\CITIC\trunk\CSPBin"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -232,6 +235,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\UKeyAPI.h"
+				>
+			</File>
+			<File
 				RelativePath=".\VisualCardMonitor.h"
 				>
 			</File>
@@ -264,5 +271,9 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="VisualCardMonitor.rc"
+		/>
 	</Globals>
 </VisualStudioProject>
