@@ -35,6 +35,8 @@ Version : 1.0.4.1
 
 #define WRITE_DEBUG_MESSAGE
 
+#define MAX_USB_DEVICE 16
+
 typedef struct tagHDIFD20B_STATE 
 {
 	int data;
@@ -628,7 +630,8 @@ HDIFD20B_API unsigned short CCONV HD_OpenPort(short ivPortNo,unsigned long ivBau
 				StringLen = StringLen+strlen((char*)ReaderNameTmp);
 				StringLen = StringLen+1;
 				strcpy((char*)ReaderNameTmp,(char*)ResponseBuffer+StringLen);
-				if (memcmp((char *)ReaderNameTmp, "HED VIRTUAL_CARD_READER", 23) == 0)
+//				if (memcmp((char *)ReaderNameTmp, "HED VIRTUAL_CARD_READER", 23) == 0)
+				if (memcmp((char *)ReaderNameTmp, "SCM Microsystems Inc. SCR33x USB Smart Card Reader 0", 0x34) == 0)
 					break;
 			}
 		}
