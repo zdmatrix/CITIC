@@ -67,7 +67,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="CRYPT32.LIB UKey.lib CspCtrl.lib"
+				AdditionalDependencies="CRYPT32.LIB UKey.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="D:\vs\code\CITIC\trunk\CSPBin"
 				GenerateDebugInformation="true"

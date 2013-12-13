@@ -63,7 +63,6 @@ BOOL CVisualCardMonitorDlg::OnInitDialog()
 	RegisterDevNotify();
 
 	// TODO: Add extra initialization here
-	m_isNotify = FALSE;
 	DetectReader();
 	m_isNotify = FALSE;
 	if (!m_isNotify)  
@@ -342,6 +341,53 @@ void CVisualCardMonitorDlg::DeleteRootCert()
 			NULL,   
 			pszNameString,   
 			128);
+
+	//---------------------------------------------------------------------
+	// test code zdmatrix
+		DWORD  cbData;
+		DWORD  dwPropId = 0; 
+		
+		//设置默认类型返回值，1表示文件证书。
+	
+		CRYPT_KEY_PROV_INFO *pCryptKeyProvInfo = NULL; 
+
+		while(dwPropId = CertEnumCertificateContextProperties(pCertContext,dwPropId)) 							
+		{
+			switch(dwPropId)
+			{
+				//证书CSP提供者的属性ID
+				case CERT_KEY_PROV_INFO_PROP_ID:
+			
+				{
+					//获取属性长度
+					if(!(CertGetCertificateContextProperty(pCertContext,dwPropId,NULL,&cbData)))break;
+
+					//分配属性内存空间		  
+					if(!(pCryptKeyProvInfo = (CRYPT_KEY_PROV_INFO *)malloc(cbData)))break;
+
+					//获取属性内容
+					if(CertGetCertificateContextProperty(pCertContext,dwPropId,pCryptKeyProvInfo,&cbData))
+					{
+						//将CSP提供者的名称转换成CHAR类型
+						char szProvName[256] = {0};
+						WideCharToMultiByte(936, 0, pCryptKeyProvInfo->pwszProvName, wcslen(pCryptKeyProvInfo->pwszProvName), szProvName, 256,NULL, NULL);
+
+						//比较判断CSP名称
+//						if(strcmp(FT_CSP_NAME, (CHAR *)szProvName)==0){
+							//飞天USBKEY证书
+//							*type=2;													
+//						}else if(strcmp(GD_CSP_NAME, (CHAR *)szProvName)==0)
+//						{
+							//捷德USBKEY证书
+//							*type=2;
+//						}
+					}
+				}//end case
+				if (pCryptKeyProvInfo)
+					free(pCryptKeyProvInfo);
+			}//end switch
+		}//end while
+	//------------------------------------------------------------------
 
 	//-------------------------------------------------------------------
 	// Check to determine whether the issuer 
