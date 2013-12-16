@@ -69,12 +69,15 @@ int main(int argc, char* argv[])
 	if(UKeyOpen(&hUKey))
 	{
 //		if(UKeyGetCert(hUKey, NULL, pbdate, 0x7fc))
-//		if(UKeyRSASignature(hUKey, 0x00, indata, length, respData, ReaderNo))
+		if(UKeyRSASignature(hUKey, 0x00, indata, length, respData, ReaderNo))
 //		if(UKeyCheckPIN(hUKey, 1))
-		if(UKeyGetContainer(hUKey, pContainerName, pstrCardCt))
+//		if(UKeyGetContainer(hUKey, pContainerName, pstrCardCt))
 		{
-			printf("Hello World!\n");
-			getchar();
+			if(UKeyRSASignatureVerify(hUKey, 0x00, respData, *ReaderNo, apduData, ReaderNo))
+			{
+				printf("Hello World!\n");
+				getchar();
+			}
 		}
 		else
 		{

@@ -363,6 +363,7 @@ DllRegisterServer(
         && (VER_PLATFORM_WIN32_NT == osVer.dwPlatformId)
         && (5 <= osVer.dwMajorVersion)
         && (NULL != hSigResource))
+//		&& (NULL == hSigResource))
     {
 
         //
