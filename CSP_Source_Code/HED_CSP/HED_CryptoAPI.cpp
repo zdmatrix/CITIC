@@ -247,6 +247,8 @@ CPAcquireContext1(
 
 //	if(memcmp((char *)szContainer, "\\\\.\\VIRTUAL_CARD_READER 0\\", 30) == 0))
 //	if (memcmp((char *)szContainer, "\\\\.\\SCM Microsystems Inc. SCR33x USB Smart Card Reader 0\\", 0x34) == 0)
+	if(szContainer != NULL)
+	{
 	if (memcmp((char *)szContainer, "HED_RSA_Cryptographic_Service_Provider_V1.0", 0x2b) == 0)
 	{
 		if (UKeyGetContainerName(pCspContainer->hUKey, ContainerNameEx, &ContainerNameLenEx))
@@ -265,6 +267,7 @@ CPAcquireContext1(
 				strCardContainer.pbContName[ContainerNameLenEx] = 0;
 			}
 		}
+	}
 	}
 	if(dwFlags==CRYPT_DELETEKEYSET) //É¾³ýÈÝÆ÷
 	{

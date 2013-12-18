@@ -119,7 +119,13 @@ void WriteLog(char* strFunctionName, int SlotID, int SlotStatus)
 void DebugMessage(const HANDLE DevNo, const char * message)
 {
 #ifdef WRITE_DEBUG_MESSAGE
-	FILE *f = fopen("c:\\PKISystemLog.txt", "a+");
+	
+	char szPath[MAX_PATH];
+	GetModuleFileName(NULL, szPath, MAX_PATH);
+	PathRemoveFileSpec(szPath);
+
+	strcat(szPath, "\\HDIFD20B_DEBUGINFO.txt");
+	FILE *f = fopen(szPath, "a+");
 	fprintf(f, "%x==%s", DevNo, message);
 	fclose(f);
 #endif

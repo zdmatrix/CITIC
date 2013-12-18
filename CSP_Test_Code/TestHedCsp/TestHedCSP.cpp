@@ -32,13 +32,22 @@ int main(int argc, char* argv[])
 	
 //	CPGetKeyParam1(hProv, hKey, dwParam, pbDate, dwret, dwFlags);
 //	CPSetKeyParam1(hProv, hKey, KP_SALT, pbDate, dwFlags);
-	CPAcquireContext1(
+	if(!CPAcquireContext1(
 		&hProv, 
-		"HED_RSA_Cryptographic_Service_Provider_V1.0", 
-		0x00000020,
-		pVTable
+		NULL, 
+		0,
+		NULL
+		))
+	{
+		CPAcquireContext1(
+		&hProv, 
+		NULL, 
+		CRYPT_NEWKEYSET,
+		NULL
 		);
-	printf("Hello World!\n");
+		printf("Hello World!\n");
+	}
+	
 	return 0;
 }
 

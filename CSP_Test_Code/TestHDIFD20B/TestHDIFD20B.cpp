@@ -5,6 +5,8 @@
 
 #include "HDIFD20B.h"
 
+
+
 int main(int argc, char* argv[])
 {
 	HANDLE ContextNo;

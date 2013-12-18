@@ -69,7 +69,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="CRYPT32.LIB UKey.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="D:\vs\code\CITIC\trunk\CSPBin"
+				AdditionalLibraryDirectories="&quot;Z:\E\work\project\C++\github\CITIC\trunk\CSPBin&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				ImportLibrary="D:\vs\code\CITIC\trunk\CSPBin"

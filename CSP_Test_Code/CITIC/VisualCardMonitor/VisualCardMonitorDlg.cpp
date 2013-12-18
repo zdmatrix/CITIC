@@ -309,6 +309,7 @@ void CVisualCardMonitorDlg::DeleteRootCert()
 	PCCERT_CONTEXT  pDupCertContext; 
 	PCERT_PUBLIC_KEY_INFO pOldPubKey = NULL;
 	PCERT_PUBLIC_KEY_INFO pNewPubKey; 
+	const char *pszCspProvName = "041@0110108198207100032@LILONGER@00000001";
 	
 	char pszNameString[256];
 
@@ -341,14 +342,16 @@ void CVisualCardMonitorDlg::DeleteRootCert()
 			NULL,   
 			pszNameString,   
 			128);
-
-	//---------------------------------------------------------------------
+		
+		if(0 == strcmp(pszCspProvName, pszNameString)){
+			//---------------------------------------------------------------------
 	// test code zdmatrix
 		DWORD  cbData;
-		DWORD  dwPropId = 0; 
+		DWORD  dwPropId = 0;
+		int type = 0;
 		
 		//设置默认类型返回值，1表示文件证书。
-	
+		
 		CRYPT_KEY_PROV_INFO *pCryptKeyProvInfo = NULL; 
 
 		while(dwPropId = CertEnumCertificateContextProperties(pCertContext,dwPropId)) 							
@@ -373,10 +376,11 @@ void CVisualCardMonitorDlg::DeleteRootCert()
 						WideCharToMultiByte(936, 0, pCryptKeyProvInfo->pwszProvName, wcslen(pCryptKeyProvInfo->pwszProvName), szProvName, 256,NULL, NULL);
 
 						//比较判断CSP名称
-//						if(strcmp(FT_CSP_NAME, (CHAR *)szProvName)==0){
+						if(strcmp("HED_RSA_Cryptographic_Service_Provider_V1.0", (CHAR *)szProvName)==0){
 							//飞天USBKEY证书
-//							*type=2;													
-//						}else if(strcmp(GD_CSP_NAME, (CHAR *)szProvName)==0)
+							type=2;													
+						}
+//						else if(strcmp(GD_CSP_NAME, (CHAR *)szProvName)==0)
 //						{
 							//捷德USBKEY证书
 //							*type=2;
@@ -436,7 +440,11 @@ void CVisualCardMonitorDlg::DeleteRootCert()
 		// Delete the certificate.
 		CertDeleteCertificateFromStore(
 			pDupCertContext);
-
+		
+			break;//detect the specific cert, and delete it
+		}
+	
+		
 	} // end while
 
 	//-------------------------------------------------------------------

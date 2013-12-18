@@ -400,7 +400,12 @@ int HED_UKeyExtAuth ( HANDLE hUKey )
 void DebugMessage(const char * message)
 {
 #ifdef WRITE_DEBUG_MESSAGE
-	FILE *f = fopen("c:\\PKISystemLog.txt", "a+");
+	char szPath[MAX_PATH];
+	GetModuleFileName(NULL, szPath, MAX_PATH);
+	PathRemoveFileSpec(szPath);
+
+	strcat(szPath, "\\UKey_DEBUGINFO.txt");
+	FILE *f = fopen(szPath, "a+");
 	fprintf(f, message);
 	fclose(f);
 #endif
@@ -1231,9 +1236,32 @@ BOOL WINAPI UKeyRSAEncrypt(HANDLE hUKey, DWORD sfi, unsigned char *InData, int *
 	DebugMessage("[UKEY] UKeyRSAEncrypt\n");
 	unsigned char apduData[255];// = ;
 	memset(apduData, 0, sizeof(apduData));
+	
+	unsigned char fileID[2] = {0xBF, 0xCD};
+
+	if ( FALSE == HED_UKeyExtAuth ( hUKey ) )
+		return FALSE;
+	
+
+	if (!SelectADF(hUKey))
+	{
+		DebugMessage("[UKEY] UKeyGetCert SelectADF ERROR\n");
+		return FALSE;
+	}
+	
+	if(!SelectFile(hUKey, fileID))
+	{
+		DebugMessage("[UKEY] UKeyGetCert SelectADF ERROR\n");
+		return FALSE;
+	}
+	
 	apduData[0] = 0x80; //cls
-	apduData[1] = 0xF6; //ins
-	apduData[2] = (unsigned char)(0x80 | sfi); // p1 根据sfi读取私钥 
+//	apduData[1] = 0xF6; //ins
+//	apduData[2] = (unsigned char)(0x80 | sfi); // p1 根据sfi读取私钥 
+
+	apduData[1] = 0x30; //ins
+	apduData[2] = 0x00; //
+
 	apduData[3] = 0x00; //p2
 	apduData[4] = 0x80; //le
 
@@ -1274,9 +1302,32 @@ BOOL WINAPI UKeyRSADecrypt(HANDLE hUKey, DWORD sfi, unsigned char *InData, int *
 	DebugMessage("[UKEY] UKeyRSADecrypt\n");
 	unsigned char apduData[255];// = ;
 	memset(apduData, 0, sizeof(apduData));
+	
+	unsigned char fileID[2] = {0xBF, 0xCC};
+
+	if ( FALSE == HED_UKeyExtAuth ( hUKey ) )
+		return FALSE;
+	
+
+	if (!SelectADF(hUKey))
+	{
+		DebugMessage("[UKEY] UKeyGetCert SelectADF ERROR\n");
+		return FALSE;
+	}
+	
+	if(!SelectFile(hUKey, fileID))
+	{
+		DebugMessage("[UKEY] UKeyGetCert SelectADF ERROR\n");
+		return FALSE;
+	}
+
 	apduData[0] = 0x80; //cls
-	apduData[1] = 0xF8; //ins
-	apduData[2] = (unsigned char)(0x80 | sfi); //p1 根据sfi读取私钥 
+//	apduData[1] = 0xF8; //ins
+//	apduData[2] = (unsigned char)(0x80 | sfi); //p1 根据sfi读取私钥
+	
+	apduData[1] = 0x32; //ins
+	apduData[2] = 0x00; //
+
 	apduData[3] = 0x00; //p2 读取莫属
 	apduData[4] = 0x80; //le
 
